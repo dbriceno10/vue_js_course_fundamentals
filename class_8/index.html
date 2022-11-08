@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://unpkg.com/vue@next"></script>
+    <div id="app"></div>
+    <script>
+      const img1 = "https://placeimg.com/280/240/tech";
+      const img2 = "https://placeimg.com/200/150/tech";
+      const vm = Vue.createApp({
+        data() {
+          return {
+            counter: 0,
+            evt: "submit",
+          };
+        },
+        methods: {
+          increment() {
+            this.counter++;
+            console.log("click!");
+          },
+          /* submit(event) {
+            event.preventDefault();
+            this.counter++;
+          }, */
+          submit() {
+            this.counter++;
+          },
+        },
+        /* podemos asgnar cualquier evento de javascript... */
+        // template: `<button v-on:click="increment">{{ counter }}</button>`,
+        // template: `<button v-on:keyup="increment">{{ counter }}</button>`,
+        // template: `<button v-on:submit="increment">{{ counter }}</button>`,
+        // template: `<form v-on:submit="submit"><button>{{ counter }}</button></form>`,
+        //prevent es un modificador, existen varios, se puede buscar en la documentacion... stop tendria el mismo efecto
+        // template: `<form v-on:submit.prevent="submit"><button>{{ counter }}</button></form>`,
+        template: `<form v-on:[evt].prevent="submit"><button>{{ counter }}</button></form>`,
+      }).mount("#app");
+      console.log(vm);
+    </script>
+  </body>
+</html>
