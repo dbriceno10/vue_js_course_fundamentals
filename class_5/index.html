@@ -18,7 +18,8 @@
             text: "<p>Hello Vue!</p>",
           };
         },
-        template: `<div v-html="text"></div>`,
+        //Directivas en VUE, por convensión empiezan por v seguida del elemento, luego vamos a colocar dentro de ella la variable de estado a lacual estamos haciendo referencia v-text, vonce v-html... Simepre se debe tener cuidado para no renderizar información que provenga de intputs de usaurio en v-html, puesto que podría provenir scrips maliciosos...
+        template: `<div v-html="text" style="color: red;"></div>`,
       }).mount("#app");
       console.log(vm);
     </script>
