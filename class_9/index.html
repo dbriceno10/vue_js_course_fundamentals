@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://unpkg.com/vue@next"></script>
+    <div id="app"></div>
+    <script>
+      const img1 = "https://placeimg.com/280/240/tech";
+      const img2 = "https://placeimg.com/200/150/tech";
+      const vm = Vue.createApp({
+        data() {
+          return {
+            text: "Hello Vue",
+          };
+        },
+        /* methods: {
+          input(event) {
+            console.log(event.target.value);
+            this.text = event.target.value;
+          },
+        }, */
+        // template: `
+        // <p>{{ text }}</p>
+        // <input type="text" v-on:change="input" />
+        // `,
+        /* alias para poder utilizar
+        Atributos -> :
+        Eventos -> @
+        : -> v-on
+        @ -> v-bind
+
+        La directiva v-model nos permite sincronizar el modelo y la vista, por lo que no necesitaremos los manejadores de eventos (methods)
+        */
+        /* template: `
+        <p>{{ text }}</p>
+        <input
+          type="text"
+          @input="input"
+          :value="text"
+        />
+        `, */
+        template: `
+        <p>{{ text }}</p>
+        <input
+          type="text"
+          v-model="text"
+        />
+        `,
+      }).mount("#app");
+      console.log(vm);
+    </script>
+  </body>
+</html>
