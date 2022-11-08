@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://unpkg.com/vue@next"></script>
+    <div id="app"></div>
+    <script>
+      const img1 = "https://placeimg.com/280/240/tech";
+      const img2 = "https://placeimg.com/200/150/tech";
+      const vm = Vue.createApp({
+        data() {
+          return {
+            img: img1,
+            attr: "src",
+          };
+        },
+        /*Directiva v-vind nos va a permitir manejar variables declarativas de forma dinámica desde vue para poder insertar atributos a elementos de html como porquejemplo el src de una imagen
+        La sintaxis de esta directiva separa con dos puntos la directiva del argumento, se van a comportar de forma similar a funciones que reciben parametros
+        a partir de la version 3 de vue puede ser dinamico
+         */
+        // template: `<img v-bind:src="img" v-bind:alt="img" />`,
+        // template: `<img v-bind:["src"]="img" />`,
+        template: `<img v-bind:[attr]="img" />`,
+      }).mount("#app");
+      console.log(vm);
+    </script>
+  </body>
+</html>
