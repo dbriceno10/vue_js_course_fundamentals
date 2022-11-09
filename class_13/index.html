@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://unpkg.com/vue@next"></script>
+    <div id="app"></div>
+    <style>
+      html,
+      body {
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      #app,
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+      }
+      button {
+        margin-top: 24px;
+        border: none;
+        background-color: white;
+        padding: 8px 24px;
+        border-radius: 12px;
+      }
+      .closed {
+        background-color: #eca1a6;
+      }
+      .open {
+        background-color: #b5e7a0;
+      }
+    </style>
+    <script>
+      const vm = Vue.createApp({
+        data() {
+          return {
+            text: "Puerta Cerrada",
+            open: false,
+            username: "",
+          };
+        },
+        watch: {
+          open(value) {
+            if (value) {
+              console.log(value);
+              this.text = "Accede a tu cuenta";
+            } else {
+              this.text = "Cierra seción";
+              this.username = "";
+            }
+          },
+        },
+        computed: {
+          label() {
+            return this.open ? "Salir" : "Acceder";
+          },
+          styles() {
+            return this.open ? ["open"] : ["closed"];
+          },
+        },
+        //Directivas condicionales de Vue, permite hacer un render condicional de elementos html dependiendo del resultado de una variable, son muy parecidos al uso de ternarios, pero sin la limitacion de solo dos caminos, se puede utilizar los que sean necesarios
+        template: `
+        <div class="container" :class="styles">
+          <h2>{{ text }}</h2>
+          <div v-if="open">
+            <p>Hola, {{ username }}</p>
+          </div>
+          <div v-else>
+            <label>Username</label>
+            <input type="text" v-model="username" v-model="usename"/>
+          </div>
+          <div></div>
+          <button @click="open= !open">
+            <div v-if="!open">Acceder</div>
+            <div v-else>Salir</div>
+            </button>
+        </div>
+        `,
+      }).mount("#app");
+      console.log(vm);
+    </script>
+  </body>
+</html>
