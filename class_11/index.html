@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://unpkg.com/vue@next"></script>
+    <div id="app"></div>
+    <script>
+      const vm = Vue.createApp({
+        data() {
+          return {
+            //Nuestra variables de estado
+            text: "Puerta Cerrada",
+            open: false,
+          };
+        },
+        watch: {
+          //los usaremos para aprovecharnos de la reactividad de vue y escuchar cuando ocurran cambios, para que un watcher escuche a una variable especifica, esta debe llevar el mismo nombre. No son funciones computadas por lo que no tienen un return
+          text(value, oldValue) {
+            console.log(
+              "Cambio escuchado ",
+              value,
+              " ",
+              oldValue,
+              " ",
+              this.text
+            );
+          },
+          open(value) {
+            if (value) {
+              this.text = "Puerta Abierta";
+            } else {
+              this.text = "Puerta Cerrada";
+            }
+          },
+        },
+        computed: {
+          label() {
+            return this.open ? "Cerrar" : "Abrir";
+          },
+        },
+        /*  template: `
+        <div>
+          <p>{{ text }}</p>
+          <button @click="open= !open">{{ open? "Cerrar" : "Abrir"}}</button>
+        </div>
+        `, */
+        template: `
+        <div>
+          <p>{{ text }}</p>
+          <button @click="open= !open">{{ label }}</button>
+        </div>
+        `,
+      }).mount("#app");
+      console.log(vm);
+    </script>
+  </body>
+</html>
