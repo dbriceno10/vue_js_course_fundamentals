@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <div id="app"></div>
+  <script>
+    const app = Vue.createApp({
+      template: `
+      <div>
+        <v-header>
+          <h1>Esto es un titulo</h1>
+        </v-header>
+        <div>Esto es un div</div>
+      </div>
+      `
+    });
+    //Una convencion que se suele utilizar en vue al momento de crear un componente que va a ser base para otros componentes, es escribir v-nombre_del_componente
+    //Cuando queremos agregar componentes dentro de un componente raiz podemos utilizar el componente slot que  ya viene por default en vue, lo utilizamos para que los elementos que agreguemos dentro del componente raiz sean sus hijos, equivalente a utilizar el prop child de react
+    app.component("v-header", {
+      template: `
+      <header>
+        <slot></slot>
+      </header>
+      `
+    })
+    const vm = app.mount("#app");
+  </script>
+</body>
+
+</html>
