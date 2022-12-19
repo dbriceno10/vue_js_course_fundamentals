@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <div id="app"></div>
+  <script>
+    //Comunicando un elemento hijo con su elemento padre...
+    const app = Vue.createApp({
+      data() {
+        return {
+          items: ['uno', 'dos', 'tres']
+        }
+      },
+      methods: {
+        remove(i) {
+          const items = this.items.filter((element, index) => index !== i)
+          this.items = items
+        }
+      },
+      template: `
+      <ul>
+        <v-item
+        v-for="(item, i) in items"
+        v-bind:text="item"
+        v-on:remove="remove(i)"
+        />
+      </ul>
+      `
+    })
+    app.component("v-item", {
+      props: {
+        text: String
+      },
+      methods: {
+        rm() {
+          //Sintaxis especial para poder emitir eventos para poder afectar al elemento padre desde el elemento hijo, podemos mandar el evento (custom) a escuchar y un valor en el segundo argumento
+          this.$emit("remove")
+        }
+      },
+      template: `
+      <li v-on:click="rm">
+        {{text}}
+      </li>`
+    })
+    const vm = app.mount("#app");
+  </script>
+</body>
+
+</html>
