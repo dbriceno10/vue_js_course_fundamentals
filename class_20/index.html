@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <div id="app"></div>
+  <script>
+    //Vue nos provee la propiedad privide intect, que nos va a permitir pasar props a componentes ancestros sin la necesidad de pasar por el padre
+    const app = Vue.createApp({
+      data() {
+        return {
+          text: "Hello Vue!"
+        }
+      },
+      provide: {
+        otroTexto: 'Hello World!'
+      },
+      template: `
+      <div>{{text}}</div>
+      <segundo />
+      `
+    })
+    app.component("segundo", {
+      template: `
+      <tercero />
+      `
+    })
+    app.component("tercero", {
+      inject: ["otroTexto"],
+      template: `
+      <div>{{otroTexto}}</div>
+      `
+    })
+    const vm = app.mount("#app");
+  </script>
+</body>
+
+</html>
